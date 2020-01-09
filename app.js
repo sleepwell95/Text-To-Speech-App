@@ -17,10 +17,36 @@ let voices = [];
 const fetchVoices = () => {
     voices = synth.getVoices();
     console.log(voices);
+    //Loop through voices and create option list
+    voices.forEach(voice => {
+        //Create option element
+        const option = document.createElement("option");
+        //Fill options with voices and languages
+        option.textContent = voice.name + "(" + voice.lang + ")";
+        //Set needed option attributes
+        option.setAttribute("data-lang", voice.lang);
+        option.setAttribute("data-name", voice.name);
+        voiceSelect.appendChild(option);
+    });
 
 };
 fetchVoices();
 if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = fetchVoices;
+}
 
+
+//Speak
+const speak = () => {
+    //Check if speaking already
+    if (synth.speaking) {
+        console.error("Already Speaking");
+        return;
+    }
+    if (textInput.value !== '') {
+        //Get speaking
+        const speakText = new SpeechSynthesisUtterance(textInput.value);
+        //Speak End
+
+    }
 }
