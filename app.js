@@ -57,7 +57,7 @@ const speak = () => {
 
         }
         //Selected Voice
-        const SelectedVoice = voiceSelect.selectedOptions[0]
+        const selectedVoice = voiceSelect.selectedOptions[0]
             .getAttribute("data-name");
         //Loop through voices 
         voices.forEach(voice => {
@@ -74,3 +74,22 @@ const speak = () => {
         synth.speak(speakText);
     }
 };
+
+//Event Listeners
+//On button click speak
+//Text Form Submit
+textForm.addEventListener("submit", e => {
+    e.preventDefault();
+    speak();
+    textInput.blur();
+});
+
+
+//Rate value change
+rate.addEventListener("change", e => rateValue.textContent = rate.value);
+
+//Pitch Value
+pitch.addEventListener("change", e => pitchValue.textContent = pitch.value);
+
+//Voice Select Change
+voiceSelect.addEventListener("change", e => speak());
