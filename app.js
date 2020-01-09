@@ -10,6 +10,7 @@ const pitch = document.querySelector('#pitch');
 const pitchValue = document.querySelector('#pitch-value');
 const body = document.querySelector('body');
 
+
 //Init voices array
 let voices = [];
 
@@ -38,17 +39,23 @@ if (synth.onvoiceschanged !== undefined) {
 
 //Speak
 const speak = () => {
+
     //Check if speaking already
     if (synth.speaking) {
         console.error("Already Speaking");
         return;
     }
     if (textInput.value !== '') {
+        //Add background Anim
+        body.style.background = '#141414 url(img/wave.gif)';
+        body.style.backgroundRepeat = 'repeat-x';
+        body.style.backgroundSize = '100% 100%';
         //Get speaking
         const speakText = new SpeechSynthesisUtterance(textInput.value);
         //Speak End
         speakText.onend = e => {
             console.log("Done Speaking...");
+            body.style.background = '#141414';
 
         }
         //Speak Error
