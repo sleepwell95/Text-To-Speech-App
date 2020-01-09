@@ -47,6 +47,30 @@ const speak = () => {
         //Get speaking
         const speakText = new SpeechSynthesisUtterance(textInput.value);
         //Speak End
+        speakText.onend = e => {
+            console.log("Done Speaking...");
 
+        }
+        //Speak Error
+        speakText.onerror = e => {
+            console.log("Something went wrong...");
+
+        }
+        //Selected Voice
+        const SelectedVoice = voiceSelect.selectedOptions[0]
+            .getAttribute("data-name");
+        //Loop through voices 
+        voices.forEach(voice => {
+            if (voice.name === selectedVoice) {
+                speakText.voice = voice;
+            }
+        });
+        //Seting pitch and rate
+        speakText.rate = rate.value;
+        speakText.pitch = pitch.value;
+
+
+        //Speak!!!
+        synth.speak(speakText);
     }
-}
+};
